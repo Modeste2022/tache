@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste de Tâches</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #bb8282;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        input,
+        button {
+            margin: 10px;
+        }
+
+        .completed::after {
+            content: " (Complétée)";
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Liste de Tâches</h1>
+        <input type="text" id="task-input" placeholder="Nouvelle tâche">
+        <button id="add-task">Ajouter</button>
+        <ul id="task-list"></ul>
+    </div>
+    <script>
+        const taskInput = document.getElementById('task-input');
+        const addTaskButton = document.getElementById('add-task');
+        const taskList = document.getElementById('task-list');
+
+        addTaskButton.addEventListener('click', () => {
+            const taskText = taskInput.value;
+            if (taskText === '') return;
+
+            const li = document.createElement('li');
+            li.textContent = taskText;
+            taskList.appendChild(li);
+
+            taskInput.value = '';
+
+            li.addEventListener('click', () => {
+                li.classList.toggle('completed');
+            });
+
+            li.addEventListener('dblclick', () => {
+                taskList.removeChild(li);
+            });
+        });
+    </script>
+</body>
+
+</html>
